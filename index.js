@@ -43,8 +43,44 @@ async function run() {
     });
 
 
-   
+    // Shop By Category Id
 
+    app.get('/category/:category_id', async (req, res) => {
+      const categoryId = req.params.category_id;
+      const query = {
+        $or: [
+          { 'PoliceCars.category_id': parseInt(categoryId) },
+          { 'SportsCars.category_id': parseInt(categoryId) },
+          { 'Jeeps.category_id': parseInt(categoryId) },
+        ],
+      };
+
+      const result = await serviceCollection.findOne(query);
+      if (result) {
+        let filteredResult = null;
+
+        for (const category in result) {
+          if (Array.isArray(result[category])) {
+            filteredResult = result[category].find(
+              (item) => item.category_id == categoryId
+            );
+            if (filteredResult) {
+              break;
+            }
+          }
+        }
+
+        if (filteredResult) {
+          res.send(filteredResult);
+        } else {
+          res.status(404).send('Category id not found');
+        }
+      } else {
+        res.status(404).send('Category id not found');
+      }
+    });
+
+    
 
     // Send a ping to confirm a successful connection
     await client.db('admin').command({ ping: 1 });
