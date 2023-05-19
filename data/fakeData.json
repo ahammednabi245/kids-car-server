@@ -1,6 +1,7 @@
 {
     "PoliceCars": [
         {
+            "category_id": 1,
             "img": "https://m.media-amazon.com/images/I/61ryI9ZvatL._AC_UF894,1000_QL80_.jpg",
             "name": "Police Pursuit",
             "brand": "Toyland",
@@ -10,8 +11,9 @@
             "description": "This Police Pursuit toy car features realistic lights and sounds, making it perfect for thrilling police chase playtime adventures."
         },
         {
+            "category_id": 2,
             "img": "https://m.media-amazon.com/images/I/71nqDM8+7hL._AC_UF350,350_QL80_.jpg",
-            "name": " Rescue Suv Patrol",
+            "name": "Rescue Suv Patrol",
             "brand": "Toys R Us",
             "color": "Blue/White",
             "price": "$24.99",
@@ -21,6 +23,7 @@
     ],
     "SportsCars": [
         {
+            "category_id": 3,
             "img": "https://fliptoy.s3.ap-south-1.amazonaws.com/ssl-img/2022/05/27142130/Untitled-1978567456.jpg",
             "name": "Super Speedster",
             "brand": "Toyland",
@@ -30,10 +33,11 @@
             "description": "The Super Speedster toy car is designed for high-speed racing. Its sleek design and pull-back action provide thrilling racing adventures."
         },
         {
+            "category_id": 4,
             "img": "https://fliptoy.s3.ap-south-1.amazonaws.com/ssl-img/2022/05/27142113/main-image-1-4-510x510.jpg",
             "name": "Racing Rocket",
             "brand": "Toys R Us",
-            "color": "black",
+            "color": "Black",
             "price": "$19.99",
             "rating": 4.6,
             "description": "The Racing Rocket toy car features a turbo boost function and comes with racing decals, allowing kids to customize their racing experience."
@@ -41,6 +45,7 @@
     ],
     "Jeeps": [
         {
+            "category_id": 5,
             "img": "https://fliptoy.s3.ap-south-1.amazonaws.com/ssl-img/2023/03/20232744/Untitled-1487426884965-510x510.jpg",
             "name": "Adventure Explorer",
             "brand": "Toyland",
@@ -50,6 +55,7 @@
             "description": "The Adventure Explorer toy jeep is perfect for off-road adventures. It comes with working suspension and rugged tires for tackling any terrain."
         },
         {
+            "category_id": 6,
             "img": "https://fliptoy.s3.ap-south-1.amazonaws.com/ssl-img/2022/05/27142140/maisnfheruyfb764-510x510.jpg",
             "name": "Off-Road Trekker",
             "brand": "Toys R Us",
