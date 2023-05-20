@@ -98,7 +98,26 @@ async function run() {
 
 
 
-    
+    // All Toys Limitation
+
+    app.get('/allToys', async (req, res) => {
+      let page = parseInt(req.query.page) || 1;
+      let limit = parseInt(req.query.limit) || 20;
+      const skip = (page - 1) * limit;
+
+      try {
+        const result = await toyCollection
+          .find()
+          .skip(skip)
+          .limit(limit)
+          .toArray();
+
+        res.send(result);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+      }
+    });
 
 
 
