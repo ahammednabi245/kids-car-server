@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
 require('dotenv').config();
 const port = process.env.PORT || 5000;
@@ -31,6 +31,7 @@ async function run() {
     await client.connect();
 
     const serviceCollection = client.db('kidCar').collection('shopByCategory');
+    const toyCollection = client.db('kidCar').collection('toy');
 
 
 
@@ -80,7 +81,34 @@ async function run() {
       }
     });
 
+
+
+
+
+   
     
+
+
+
+
+    //  Add Toy
+
+    app.post("/post-toy", async (req, res) => {
+      const body = req.body;
+      body.createdAt = new Date();
+      console.log(body);
+      const result = await toyCollection.insertOne(body);
+      if (result?.insertedId) {
+        return res.status(200).send(result);
+      } else {
+        return res.status(404).send({
+          message: "can not insert try again leter",
+          status: false,
+        });
+      }
+    });
+
+
 
     // Send a ping to confirm a successful connection
     await client.db('admin').command({ ping: 1 });
