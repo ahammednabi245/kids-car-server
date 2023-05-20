@@ -88,11 +88,11 @@ async function run() {
     // all  toy
 
     app.get("/allToys", async (req, res) => {
-      const jobs = await toyCollection
+      const toys = await toyCollection
         .find({})
         .sort({ createdAt: -1 })
         .toArray();
-      res.send(jobs);
+      res.send(toys);
     });
 
 
@@ -125,15 +125,15 @@ async function run() {
     app.get("/allToysByText/:text", async (req, res) => {
       const text = req.params.text;
       const result = await toyCollection
-          .find({
-              $or: [
-                  { name: { $regex: text, $options: "i" } },
-                  { subCategory: { $regex: text, $options: "i" } },
-              ],
-          })
-          .toArray();
+        .find({
+          $or: [
+            { name: { $regex: text, $options: "i" } },
+            { subCategory: { $regex: text, $options: "i" } },
+          ],
+        })
+        .toArray();
       res.send(result);
-  });
+    });
 
 
 
@@ -154,14 +154,14 @@ async function run() {
     })
 
 
-    
+
 
 
 
 
     //  Add Toy
 
-    app.post("/post-toy", async (req, res) => {
+    app.post("/postToy", async (req, res) => {
       const body = req.body;
       body.createdAt = new Date();
       console.log(body);
@@ -170,13 +170,51 @@ async function run() {
         return res.status(200).send(result);
       } else {
         return res.status(404).send({
-          message: "can not insert try again leter",
+          message: "can not insert try again later",
           status: false,
         });
       }
     });
 
+
+    // My toys
+
+    app.get("/myToys/:email", async (req, res) => {
+      console.log(req.params.email);
+      const toys = await toyCollection
+        .find({
+          sellerEmail: req.params.email,
+        })
+        .toArray();
+      res.send(toys);
+    });
+
+    // Update My toys 
+
     
+    app.put('/updateToy/:id', async (req, res) => {
+      const id = req.params.id;
+      const body = req.body;
+      console.log(body);
+      const filter = { _id: new ObjectId(id) };
+      const updateDoc = {
+        $set: {
+          name: body.name,
+          quantity: body.quantity,
+          sellerName: body.sellerName,
+          sellerEmail: body.sellerEmail,
+          price: body.price,
+          rating: body.rating,
+          subCategory: body.subCategory,
+          description: body.description,
+          photo: body.photo,
+        },
+      };
+      const result = await toyCollection.updateOne(filter, updateDoc);
+      res.send(result);
+    });
+
+
 
     // Send a ping to confirm a successful connection
     await client.db('admin').command({ ping: 1 });
