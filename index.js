@@ -85,7 +85,21 @@ async function run() {
 
 
 
-   
+    // all  toy
+
+    app.get("/allToys", async (req, res) => {
+      const jobs = await toyCollection
+        .find({})
+        .sort({ createdAt: -1 })
+        .toArray();
+      res.send(jobs);
+    });
+
+
+
+
+    
+
     
 
 
@@ -108,7 +122,7 @@ async function run() {
       }
     });
 
-
+    
 
     // Send a ping to confirm a successful connection
     await client.db('admin').command({ ping: 1 });
