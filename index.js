@@ -100,6 +100,25 @@ async function run() {
 
     
 
+
+
+
+    // All Toys Id
+
+    app.get('/allToys/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) }
+
+      const options = {
+        // Include only the `title` and `imdb` fields in the returned document
+        projection: { name: 1, quantity: 1, sellerName: 1, sellerEmail: 1, price: 1, rating: 1, subCategory: 1, description: 1, photo: 1 },
+      };
+
+      const result = await toyCollection.findOne(query, options);
+      res.send(result);
+    })
+
+
     
 
 
