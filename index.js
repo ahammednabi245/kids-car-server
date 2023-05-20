@@ -120,6 +120,22 @@ async function run() {
     });
 
 
+    // All toys Search Implement
+
+    app.get("/allToysByText/:text", async (req, res) => {
+      const text = req.params.text;
+      const result = await toyCollection
+          .find({
+              $or: [
+                  { name: { $regex: text, $options: "i" } },
+                  { subCategory: { $regex: text, $options: "i" } },
+              ],
+          })
+          .toArray();
+      res.send(result);
+  });
+
+
 
 
     // All Toys Id
