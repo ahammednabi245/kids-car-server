@@ -189,6 +189,19 @@ async function run() {
       res.send(toys);
     });
 
+    // My Toys Sorting
+    
+    app.get("/myToys", async (req, res) => {
+      const type = req.query.type === "ascending";
+      const value = req.query.value;
+      const sortObj = {};
+      sortObj[value] = type ? 1 : -1;
+      const toys = await toyCollection.find({}).sort({ price: type ? 1 : -1 }).toArray();
+      res.send(toys);
+    });
+    
+
+
     // Update My toys 
 
 
